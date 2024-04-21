@@ -2,8 +2,6 @@
 Descripción: Este programa en JavaScript combina dos arrays de nombres y apellidos
 de forma aleatoria, formateando los nombres y apellidos para luego convertir el primer elemento
 en mayuscula y el resto en minusculas
-- Las vocales que aparecen en la frase.
-- Cuántas veces aparece cada una de las vocales.
 Desarrollador: Castro Naidar
 Fecha: 21/04/2024
 */
