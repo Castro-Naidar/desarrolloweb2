@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/botones.css">
+</head>
+
+<body>
+    <p>
+        <button onClick="toggleform('content_first')">First</button>
+        <button onClick="toggleform('content_second')">Second</button>
+        <button onClick="toggleform('content_third')">Third</button>
+    </p>
+    <div class="content" id="content_first" hidden>
+        <form>
+            <label for="nombre1">Nombre1</label>
+                <input type="text" id="Nombre1">
+                <button type="submit">ENVIAR</button>
+        </form>
+    </div><!-- #content_first -->
+    <div class="content" id="content_second" hidden>
+        <form>
+            <label for="nombre1">Nombre2</label>
+                <input type="text" id="Nombre2">
+                <button type="submit">ENVIAR</button>
+        </form>
+    </div><!-- #content_second -->
+    <div class="content" id="content_third" hidden>
+        <form>
+            <labe for="nombre1">Nombre3</label>
+                <input type="text" id="Nombre3">
+                <button type="submit">ENVIAR</button>
+        </form>
+    </div><!-- #content_third -->
+    <script>
+        function toggleform(formID) {
+            var forElement = document.getElementById(formID);
+            forElement.hidden = !forElement.hidden;
+        }
+    </script>
+</body>
+
+</html>
