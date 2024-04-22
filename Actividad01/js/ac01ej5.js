@@ -4,6 +4,7 @@ de forma aleatoria, formateando los nombres y apellidos para luego convertir el 
 en mayuscula y el resto en minusculas
 Desarrollador: Castro Naidar
 Fecha: 21/04/2024
+Cambios: Ninguno
 */
 
 // Función para combinar de forma aleatoria nombres y apellidos
