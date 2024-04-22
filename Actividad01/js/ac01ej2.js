@@ -3,6 +3,7 @@ Descripción: Programa que solicita un usuario, contraseña y luego valida esa c
 usuarios.
 Desarrollador: Castro Naidar
 Fecha: 21/04/2024
+Cambios: Ninguno
 */
 
 // Solicitar al usuario que ingrese su nombre de usuario y contraseña
