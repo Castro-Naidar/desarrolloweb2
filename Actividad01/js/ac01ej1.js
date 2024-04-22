@@ -10,18 +10,18 @@ Cambios: Ninguno
 if (navigator) {
     // Función para obtener el nombre del navegador
     function ObtNomNav() {
-        if (navigator.userAgent.indexOf("MSIE") !== -1 || navigator.appVersion.indexOf("Trident/") > -1)
-            return "Internet Explorer";
+        if (navigator.userAgent.indexOf("Chrome") !== -1)
+            return "Google Chrome";
+        else if (navigator.userAgent.indexOf("Firefox") !== -1)
+            return "Mozilla Firefox";
         else if (navigator.userAgent.indexOf("Edg") !== -1)
             return "Microsoft Edge";
         else if (navigator.userAgent.indexOf("OPR") !== -1 || navigator.userAgent.indexOf("Opera") !== -1)
             return "Opera";
-        else if (navigator.userAgent.indexOf("Chrome") !== -1)
-            return "Google Chrome";
-        else if (navigator.userAgent.indexOf("Firefox") !== -1)
-            return "Mozilla Firefox";
         else if (navigator.userAgent.indexOf("Safari") !== -1)
             return "Apple Safari";
+        else if (navigator.userAgent.indexOf("MSIE") !== -1 || navigator.appVersion.indexOf("Trident/") > -1)
+            return "Internet Explorer";
         else
             return "Navegador desconocido";
     }
