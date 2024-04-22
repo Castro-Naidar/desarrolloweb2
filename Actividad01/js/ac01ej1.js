@@ -3,6 +3,7 @@ Descripción: Este es un programa simple en JavaScript que da la bienvenida al u
 en qué navegador se está ejecutando.
 Desarrollador: Castro Naidar
 Fecha: 21/04/2024
+Cambios: Ninguno
 */
 
 // Validar si el navegador es compatible con el objeto navigator
