@@ -8,40 +8,31 @@ Cambios: Ninguno
 
 // Validar si el navegador es compatible con el objeto navigator
 if (navigator) {
-    // Obtener el nombre del navegador
-    var browserName = navigator.userAgent;
-
     // Función para obtener el nombre del navegador
-    function getBrowserName() {
-        switch (true) {
-            case browserName.indexOf("Chrome") !== -1:
-                $NomNav = "Google Chrome";
-                break;
-            case browserName.indexOf("Firefox") !== -1:
-                $NomNav = "Mozilla Firefox";
-                break;
-            case browserName.indexOf("Googlebot") !== -1:
-                $NomNav = "Googlebot";
-                break
-            case browserName.indexOf("Opera") !== -1:
-                $NomNav = "Opera";
-                break
-            case browserName.indexOf("Safari") !== -1:
-                $NomNav = "Safari";
-                break;
-            default:
-                $NomNav = "Navegador desconocido";
-                break;
-        }
-        return $NomNav
+    function ObtNomNav() {
+        if (navigator.userAgent.indexOf("MSIE") !== -1 || navigator.appVersion.indexOf("Trident/") > -1)
+            return "Internet Explorer";
+        else if (navigator.userAgent.indexOf("Edg") !== -1)
+            return "Microsoft Edge";
+        else if (navigator.userAgent.indexOf("OPR") !== -1 || navigator.userAgent.indexOf("Opera") !== -1)
+            return "Opera";
+        else if (navigator.userAgent.indexOf("Chrome") !== -1)
+            return "Google Chrome";
+        else if (navigator.userAgent.indexOf("Firefox") !== -1)
+            return "Mozilla Firefox";
+        else if (navigator.userAgent.indexOf("Safari") !== -1)
+            return "Apple Safari";
+        else
+            return "Navegador desconocido";
     }
-    
-    // variable para almacenar el nombre del navegador
-    var currentBrowser = getBrowserName();
+
+    // Variable para almacenar el nombre del navegador
+    var NavUsa = ObtNomNav();
 
     // Mostrar mensaje de bienvenida y el nombre del navegador
-    alert("¡Bienvenido! Estás utilizando " + currentBrowser + ".");
+    alert("¡Bienvenido! Estás utilizando " + NavUsa + ".");
 } else {
-    // Si el objeto navigator no está disponible mostramos un mensaje de error
+    // Si el objeto navigator no está disponible, mostrar un mensaje de error
     alert("Lo siento, este navegador no es compatible con el objeto Navigator.");
 }
+
