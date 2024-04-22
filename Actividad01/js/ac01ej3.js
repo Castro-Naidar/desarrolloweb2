@@ -3,6 +3,7 @@ Descripción: Programa para imrprimir "N" cantidad de numeros primos generados a
 cargados en un array que sean menores a 110.
 Desarrollador: Castro Naidar
 Fecha: 21/04/2024
+Cambios: Ninguno
 */
 
 // Función para verificar si un número es primo
