@@ -5,6 +5,7 @@ Descripción: Este programa en JavaScript solicita una frase al usuario y muestr
 - Cuántas veces aparece cada una de las vocales.
 Desarrollador: Castro Naidar
 Fecha: 21/04/2024
+Cambios: Ninguno
 */
 
 // Función para contar las ocurrencias de la letra "o" en una frase
