@@ -2,20 +2,20 @@
 //Máscaras com Jquery
 
 $(document).ready(function () {
-  var SPMaskBehavior = function (val) {
-    return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-  }, spOptions = {
-    onKeyPress: function (val, e, field, options) {
-        field.mask(SPMaskBehavior.apply({}, arguments), options);
-    }
-  };
+    var SPMaskBehavior = function (val) {
+        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    }, spOptions = {
+        onKeyPress: function (val, e, field, options) {
+            field.mask(SPMaskBehavior.apply({}, arguments), options);
+        }
+    };
 
-  if ($("#cep").length > 0) {
-    $("#cep").mask('99.999-999');
-  } 
-  if ($("#telefone").length > 0) {
-    $('#telefone').mask(SPMaskBehavior, spOptions);
-  }
+    if ($("#cep").length > 0) {
+        $("#cep").mask('99.999-999');
+    }
+    if ($("#telefone").length > 0) {
+        $('#telefone').mask(SPMaskBehavior, spOptions);
+    }
 
 });
 
@@ -27,7 +27,7 @@ const inputCep = document.querySelector('#cep');
 const resultadoLogradouro = document.querySelector('#logradouro');
 const resultadoComplemento = document.querySelector('#complemento');
 const resultadoBairro = document.querySelector('#bairro');
-const resultadoCidade= document.querySelector('#cidade');
+const resultadoCidade = document.querySelector('#cidade');
 const resultadoEstado = document.querySelector('#estado');
 
 
@@ -36,27 +36,27 @@ inputCep.addEventListener('change', handleSearch);
 
 //função para busca do cep digitado
 function handleSearch(event) {
-  event.preventDefault();
-  const cep = inputCep.value;
-  buscaCep(cep);
+    event.preventDefault();
+    const cep = inputCep.value;
+    buscaCep(cep);
 }
 
 //funcao para realizar o fetch e preencher cada campo com o valor do objeto json retornado pela funcao. 
 
 function buscaCep(cep) {
-  //replace utilizado para retirar a mascara e realizar a busca apenas com os digitos do input
-  var cep = cep.replace(/\D/g, '');
+    //replace utilizado para retirar a mascara e realizar a busca apenas com os digitos do input
+    var cep = cep.replace(/\D/g, '');
 
-  fetch(`https://viacep.com.br/ws/${cep}/json/`)
-  .then(response => response.json())
-  .then(cepJson => {
-    resultadoLogradouro.value= cepJson.logradouro;
-    resultadoComplemento.value= cepJson.complemento;
-    resultadoBairro.value= cepJson.bairro;
-    resultadoCidade.value= cepJson.localidade;
-    resultadoEstado.value= cepJson.uf;
-  })
- 
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then(response => response.json())
+        .then(cepJson => {
+            resultadoLogradouro.value = cepJson.logradouro;
+            resultadoComplemento.value = cepJson.complemento;
+            resultadoBairro.value = cepJson.bairro;
+            resultadoCidade.value = cepJson.localidade;
+            resultadoEstado.value = cepJson.uf;
+        })
+
 }
 
 // Validação preenchimento dos campos.
@@ -68,10 +68,10 @@ function ValidateField(field) {
     function verifyErrors() {
         let foundError = false;
 
-        for(let error in field.validity) {
+        for (let error in field.validity) {
             // se não for customError
             // então verifica se tem erro
-            if (field.validity[error] && !field.validity.valid ) {
+            if (field.validity[error] && !field.validity.valid) {
                 foundError = error
             }
         }
@@ -94,7 +94,7 @@ function ValidateField(field) {
 
     function setCustomMessage(message) {
         const spanError = field.parentNode.querySelector("span.error")
-        
+
         if (message) {
             spanError.classList.add("active")
             spanError.innerHTML = message
@@ -104,11 +104,11 @@ function ValidateField(field) {
         }
     }
 
-    return function() {
+    return function () {
 
         const error = verifyErrors()
 
-        if(error) {
+        if (error) {
             const message = customMessage(error)
 
             field.style.borderColor = "#e14747";
@@ -129,8 +129,8 @@ function customValidation(event) {
 
 }
 
-for( field of fields ){
-    field.addEventListener("invalid", event => { 
+for (field of fields) {
+    field.addEventListener("invalid", event => {
         // eliminar o bubble da mensagem de erro padrao do html
         event.preventDefault()
 
@@ -141,9 +141,38 @@ for( field of fields ){
 
 // o alerta com a confirmacao do envio do formulario só será exibido se não houver erro no preenchimento. 
 document.querySelector("form")
-.addEventListener("submit", event => {
-    alert("Formulário enviado com sucesso, obrigado!");
+    .addEventListener("submit", event => {
+        alert("Formulário enviado com sucesso, obrigado!");
 
-    event.preventDefault()
-})
+        event.preventDefault()
+    })
+
+$(document).ready(function () {
+    // Ciudades por departamento
+    var ciudadesPorDepartamento = {
+        "1": ["Beni Ciudad 1", "Beni Ciudad 2", "Beni Ciudad 3"],
+        "2": ["Cochabamba Ciudad 1", "Cochabamba Ciudad 2", "Cochabamba Ciudad 3"],
+        "3": ["Chuquisaca Ciudad 1", "Chuquisaca Ciudad 2", "Chuquisaca Ciudad 3"],
+        "4": ["La Paz Ciudad 1", "La Paz Ciudad 2", "La Paz Ciudad 3"],
+        "5": ["Oruro Ciudad 1", "Oruro Ciudad 2", "Oruro Ciudad 3"],
+        "6": ["Pando Ciudad 1", "Pando Ciudad 2", "Pando Ciudad 3"],
+        "7": ["Potosi Ciudad 1", "Potosi Ciudad 2", "Potosi Ciudad 3"],
+        "8": ["Santa Cruz De La Sierra Ciudad 1", "Santa Cruz De La Sierra Ciudad 2", "Santa Cruz De La Sierra Ciudad 3"],
+        "9": ["Tarija Ciudad 1", "Tarija Ciudad 2", "Tarija Ciudad 3"]
+    };
+
+    // Función para actualizar las ciudades cuando se selecciona un departamento
+    $("#departamento").change(function () {
+        var departamento = $(this).val();
+        var ciudades = ciudadesPorDepartamento[departamento];
+        var options = "<option value=''>Seleccionar ciudad</option>";
+        if (ciudades) {
+            for (var i = 0; i < ciudades.length; i++) {
+                options += "<option value='" + ciudades[i] + "'>" + ciudades[i] + "</option>";
+            }
+        }
+        $("#estado").html(options);
+    });
+});
+
 

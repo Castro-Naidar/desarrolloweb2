@@ -14,12 +14,12 @@
 <body>
   <section>
     <div class="container">
-      <h1>registre-se aqui</h1>
+      <h1>Registrese aqui</h1>
 
       <form id="cadastro" action="">
 
         <div class="dados-pessoais">
-          <h2>dados pessoais</h2>
+          <h2>Datos personales</h2>
           <div class="input-container">
             <label for="name">Nome *</label>
             <input type="text" name="nome" id="nome" required>
@@ -78,15 +78,26 @@
           <div class="row">
 
             <div class="input-container col-md-8">
-              <label for="cidade">cidade</label>
-              <input type="text" name="cidade" id="cidade">
+              <label for="departamento">Departamento</label>
+              <select class="form-select" aria-label="Selecionar departamento" name="departamento" id="departamento" required>
+                <option value="1">Beni</option>
+                <option value="2">Cochabamba</option>
+                <option value="3">Chuquisaca</option>
+                <option value="4">La Paz</option>
+                <option value="5">Oruro</option>
+                <option value="6">Pando</option>
+                <option value="7">Potosi</option>
+                <option value="8">Santa Cruz De La Sierra</option>
+                <option value="9">Tarija</option>
+              </select>
               <span class="error"></span>
             </div>
 
-
             <div class="input-container col-md-4">
-              <label for="estado">estado</label>
-              <input type="text" name="estado" id="estado">
+              <label for="estado">Ciudad</label>
+              <select class="form-select" aria-label="Selecionar ciudad" name="estado" id="estado" required>
+                <option value="">Seleccionar ciudad</option>
+              </select>
               <span class="error"></span>
             </div>
           </div>
@@ -107,3 +118,4 @@
 </body>
 
 </html>
+
