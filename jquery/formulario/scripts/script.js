@@ -86,6 +86,9 @@ function ValidateField(field) {
             email: {
                 valueMissing: "Email obligatorio",
                 typeMismatch: "Por favor, llena este campo."
+            },
+            tel: {
+                typeMismatch: "Por favor, llena este campo."
             }
         }
 
