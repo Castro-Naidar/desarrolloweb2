@@ -220,4 +220,69 @@ $(document).ready(function () {
     $("#departamento").val(PriDep).change();
 });
 
+$(document).ready(function () {
+    // Función para guardar los datos del formulario en un array
+    function guardarDatos() {
+        var datos = {
+            nombre: $("#nome").val(),
+            email: $("#email").val(),
+            telefono: $("#telefone").val(),
+            cep: $("#cep").val(),
+            barrio: $("#bairro").val(),
+            numero: $("#numero").val(),
+            vivienda: $("#vivienda").val(),
+            departamento: $("#departamento").val(),
+            ciudad: $("#municipio").val()
+        };
+        return datos;
+    }
+
+    // Evento cuando se envía el formulario
+    $("#cadastro").submit(function (event) {
+        // Prevenir el envío por defecto
+        event.preventDefault();
+
+        // Guardar los datos en un array
+        var datosArray = guardarDatos();
+
+        // Aquí puedes hacer lo que quieras con los datosArray, como enviarlos a un servidor, mostrarlos en la consola, etc.
+        console.log(datosArray);
+    });
+});
+
+$(document).ready(function () {
+    $('#cadastro').submit(function (e) {
+        e.preventDefault();
+
+        // Obtener los valores del formulario
+        var nombre = $('#nome').val();
+        var email = $('#email').val();
+        var telefono = $('#telefone').val();
+        var ci = $('#cep').val();
+        var barrio = $('#bairro').val();
+        var numero = $('#numero').val();
+        var vivienda = $('#vivienda option:selected').text();
+        var departamento = $('#departamento option:selected').text();
+        var ciudad = $('#municipio option:selected').text();
+
+        // Crear una nueva fila en la tabla
+        var newRow = $('<tr>');
+        newRow.append('<td>' + nombre + '</td>');
+        newRow.append('<td>' + email + '</td>');
+        newRow.append('<td>' + telefono + '</td>');
+        newRow.append('<td>' + ci + '</td>');
+        newRow.append('<td>' + barrio + '</td>');
+        newRow.append('<td>' + numero + '</td>');
+        newRow.append('<td>' + vivienda + '</td>');
+        newRow.append('<td>' + departamento + '</td>');
+        newRow.append('<td>' + ciudad + '</td>');
+
+        // Agregar la fila a la tabla
+        $('#datos-body').append(newRow);
+
+        // Limpiar el formulario después de enviar
+        $('#cadastro')[0].reset();
+    });
+});
+
 
