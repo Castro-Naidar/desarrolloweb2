@@ -219,3 +219,5 @@ $(document).ready(function () {
     var PriDep = Object.keys(MunPorDe)[0];
     $("#departamento").val(PriDep).change();
 });
+
+
