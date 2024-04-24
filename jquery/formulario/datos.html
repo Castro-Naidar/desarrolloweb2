@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Datos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Datos Registrados</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>CI</th>
+                    <th>Barrio</th>
+                    <th>Número de inmueble</th>
+                    <th>Tipo de vivienda</th>
+                    <th>Departamento</th>
+                    <th>Ciudad</th>
+                </tr>
+            </thead>
+            <tbody id="datos-body">
+                <!-- Aquí se mostrarán los datos -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        // Función para obtener los datos guardados en localStorage y mostrarlos en la tabla
+        $(document).ready(function() {
+            // Obtener los datos guardados en localStorage
+            var nombre = localStorage.getItem('nombre');
+            var email = localStorage.getItem('email');
+            var telefono = localStorage.getItem('telefono');
+            var cep = localStorage.getItem('cep');
+            var barrio = localStorage.getItem('barrio');
+            var numero = localStorage.getItem('numero');
+            var vivienda = localStorage.getItem('vivienda');
+            var departamento = localStorage.getItem('departamento');
+            var estado = localStorage.getItem('estado');
+
+            // Crear una fila para mostrar los datos en la tabla
+            var fila = $('<tr>').append(
+                $('<td>').text(nombre),
+                $('<td>').text(email),
+                $('<td>').text(telefono),
+                $('<td>').text(cep),
+                $('<td>').text(barrio),
+                $('<td>').text(numero),
+                $('<td>').text(vivienda === '1' ? 'Propia' : 'Alquilada'), // Convertir el valor de vivienda a texto
+                $('<td>').text(departamento),
+                $('<td>').text(estado)
+            );
+
+            // Agregar la fila al cuerpo de la tabla
+            $('#datos-body').append(fila);
+        });
+    </script>
+</body>
+</html>
+
+
+
+

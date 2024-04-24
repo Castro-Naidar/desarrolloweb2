@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -16,12 +16,12 @@
     <div class="container">
       <h1>Registrese aqui</h1>
 
-      <form id="cadastro" action="">
+      <form id="cadastro" action="datos.html" method="post">
 
         <div class="dados-pessoais">
           <h2>Datos personales</h2>
           <div class="input-container">
-            <label for="name">Nome *</label>
+            <label for="name">Nombre *</label>
             <input type="text" name="nome" id="nome" required>
             <span class="error"></span>
           </div>
@@ -33,8 +33,14 @@
           </div>
 
           <div class="input-container">
-            <label for="telefone">Telefone *</label>
+            <label for="telefone">Telefono *</label>
             <input type="tel" name="telefone" id="telefone" required>
+            <span class="error"></span>
+          </div>
+          
+          <div class="input-container">
+            <label for="cep">C.I *</label>
+            <input type="text" name="cep" id="cep" maxlength="10" required>
             <span class="error"></span>
           </div>
 
@@ -42,37 +48,29 @@
         </div>
 
         <div class="endereco">
-          <h2>endereço</h2>
-          <div class="input-container">
-            <label for="cep">CEP *</label>
-            <input type="text" name="cep" id="cep" maxlength="10" required>
-            <span class="error"></span>
-          </div>
+          <h2>Direccion</h2>
 
           <div class="input-container">
-            <label for="logradouro">Logradouro</label>
-            <input type="text" name="logradouro" id="logradouro">
+            <label for="bairro">Barrio</label>
+            <input type="text" name="bairro" id="bairro" required>
             <span class="error"></span>
           </div>
 
           <div class="row">
             <div class="input-container col-md-4">
-              <label for="numero">Número</label>
+              <label for="numero">Número de inmueble</label>
               <input type="text" name="numero" id="numero" required>
               <span class="error"></span>
             </div>
 
             <div class="input-container col-md-8">
-              <label for="complemento">Complemento</label>
-              <input type="text" name="complemento" id="complemento">
+              <label for="complemento">Tipo de vivienda</label>
+              <select class="form-select" aria-label="Seleccionar tipo de vivienda" name="vivienda" id="vivienda" required>
+                <option value="1">Propia</option>
+                <option value="2">Alquilada</option>
+              </select>
               <span class="error"></span>
             </div>
-          </div>
-
-          <div class="input-container">
-            <label for="bairro">Bairro</label>
-            <input type="text" name="bairro" id="bairro">
-            <span class="error"></span>
           </div>
 
           <div class="row">
@@ -95,7 +93,7 @@
 
             <div class="input-container col-md-4">
               <label for="estado">Ciudad</label>
-              <select class="form-select" aria-label="Selecionar ciudad" name="estado" id="estado" required>
+              <select class="form-select" aria-label="Selecionar ciudad" name="estado" id="municipio" required>
                 <option value="">Seleccionar ciudad</option>
               </select>
               <span class="error"></span>
@@ -115,6 +113,7 @@
   <script src="./scripts/jquery.mask.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
   <script src="./scripts/script.js"></script>
+  
 </body>
 
 </html>

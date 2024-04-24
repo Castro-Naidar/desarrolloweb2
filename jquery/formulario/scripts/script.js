@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
     var SPMaskBehavior = function (val) {
-        return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        return val.replace(/\D/g, '').length === 11 ? '00000000' : '00000000';
     }, spOptions = {
         onKeyPress: function (val, e, field, options) {
             field.mask(SPMaskBehavior.apply({}, arguments), options);
@@ -11,7 +11,7 @@ $(document).ready(function () {
     };
 
     if ($("#cep").length > 0) {
-        $("#cep").mask('99.999-999');
+        $("#cep").mask('00000000');
     }
     if ($("#telefone").length > 0) {
         $('#telefone').mask(SPMaskBehavior, spOptions);
@@ -27,8 +27,8 @@ const inputCep = document.querySelector('#cep');
 const resultadoLogradouro = document.querySelector('#logradouro');
 const resultadoComplemento = document.querySelector('#complemento');
 const resultadoBairro = document.querySelector('#bairro');
-const resultadoCidade = document.querySelector('#cidade');
-const resultadoEstado = document.querySelector('#estado');
+const resultadoCidade = document.querySelector('#departamento');
+const resultadoEstado = document.querySelector('#municipio');
 
 
 // Adicionado um eventListener para identificar quando o campo de inputCep for alterado e assim lidar com a busca, só inicia a funcao callback quando o usuario apertar enter ou tab no teclado e passar para o proximo campo
@@ -81,11 +81,11 @@ function ValidateField(field) {
     function customMessage(typeError) {
         const messages = {
             text: {
-                valueMissing: "* Por favor, preencha este campo"
+                valueMissing: "* Por favor, llena este campo"
             },
             email: {
-                valueMissing: "Email é obrigatório",
-                typeMismatch: "Por favor, preencha um email válido."
+                valueMissing: "Email obligatorio",
+                typeMismatch: "Por favor, llena este campo."
             }
         }
 
@@ -142,37 +142,115 @@ for (field of fields) {
 // o alerta com a confirmacao do envio do formulario só será exibido se não houver erro no preenchimento. 
 document.querySelector("form")
     .addEventListener("submit", event => {
-        alert("Formulário enviado com sucesso, obrigado!");
+        alert("Registro exitoso");
 
         event.preventDefault()
     })
 
 $(document).ready(function () {
     // Ciudades por departamento
-    var ciudadesPorDepartamento = {
-        "1": ["Beni Ciudad 1", "Beni Ciudad 2", "Beni Ciudad 3"],
-        "2": ["Cochabamba Ciudad 1", "Cochabamba Ciudad 2", "Cochabamba Ciudad 3"],
-        "3": ["Chuquisaca Ciudad 1", "Chuquisaca Ciudad 2", "Chuquisaca Ciudad 3"],
-        "4": ["La Paz Ciudad 1", "La Paz Ciudad 2", "La Paz Ciudad 3"],
-        "5": ["Oruro Ciudad 1", "Oruro Ciudad 2", "Oruro Ciudad 3"],
-        "6": ["Pando Ciudad 1", "Pando Ciudad 2", "Pando Ciudad 3"],
-        "7": ["Potosi Ciudad 1", "Potosi Ciudad 2", "Potosi Ciudad 3"],
-        "8": ["Santa Cruz De La Sierra Ciudad 1", "Santa Cruz De La Sierra Ciudad 2", "Santa Cruz De La Sierra Ciudad 3"],
-        "9": ["Tarija Ciudad 1", "Tarija Ciudad 2", "Tarija Ciudad 3"]
+    var MunPorDe = {
+        "1": ["Trinidad", "Riberalta", "Guayaramerin", "San Borja", "San Ignacio", "Rurrenabaque",
+            "Santa Ana Del Yacuma", "Reyes", "San Andres", "Magdalena", "Santa Rosa",
+            "San Joaquin", "Exaltacion", "Baures", "San Javier", "San Ramon", "Huacaraje", "Loreto",
+            "Puerto Siles"],
+        "2": ["Cochabamba", "Sacaba", "Quillacollo", "Villa Tunari", "Tiquipaya", "Colcapirhua",
+            "Vinto", "Puerto Villaroel", "Sipe Sipe", "Entre Rios", "Punata", "Mizque", "Tapacari",
+            "Independencia", "Aiquile", "Cliza", "Chimore", "Tiraque", "Shinahota", "Capinota",
+            "Colomi", "Cocapata", "Arbieto", "Totora", "San Benito", "Morochata", "Pocona", "Arque",
+            "Tacopaya", "Pojo"],
+        "3": ["Sucre", "Yotala", "Poroma", "Presto", "El Villar", "Icla", "Tarabuco", "Villa Serrano",
+            "Zudáñez", "Mojocoya", "Culpina", "Monteagudo", "Huacareta", "Villa Vaca Guzmán", "Camargo",
+            "Villa Charcas", "Padilla", "Villa Alcalá", "Sopachuy", "Tomina", "Azurduy", "Macharetí",
+            "Huacaya", "El Villar", "Icla", "San Lucas", "Huacareta", "Incahuasi", "Tarvita"],
+        "4": ["Achacachi", "Achocalla", "Aucapata", "Batallas", "Cairoma", "Calacoto", "Calamarca", "Callapa",
+            "Caquiaviri", "Charaña", "Chúa Cocani", "Collana", "Colquencha", "Colquiri", "Comanche", "Coripata",
+            "Coro Coro", "Escoma", "Guanay", "Guaqui", "Huachacalla", "Huarina", "Humanata", "Ichoca",
+            "Inquisivi", "Jesús de Machaca", "La Asunta", "Laja", "Licoma Pampa", "Malla", "Mecapaca", "Palca",
+            "Palos Blancos", "Papel Pampa", "Pelechuco", "Pucarani", "Puerto Acosta", "Puerto Carabuco", "Puerto Pérez",
+            "Quime", "San Andrés de Machaca", "San Buenaventura", "San Pedro de Curahuara", "Santiago de Callapa",
+            "Sapahaqui", "Sica Sica", "Sorata", "Tacacoma", "Tacopaya", "Tambo Quemado", "Teoponte", "Tipuani",
+            "Tito Yupanqui", "Umala", "Ventilla", "Viacha", "Villa Alota", "Yanacachi", "Yanahuaya", "Yolosa",
+            "Zongo", "La Paz", "Copacabana", "Coroico", "Chulumani", "Irupana", "Caranavi", "Sorata", "Guanay",
+            "Mapiri", "Teoponte", "San Buenaventura", "Puerto Acosta", "Aucapata", "Achocalla", "Chúa Cocani",
+            "Batallas", "Sapahaqui", "Colquiri", "Huayllamarca", "Ayo Ayo", "Mecapaca", "San Pedro de Curahuara",
+            "Charaña", "Viacha", "Luribay", "Charazani"],
+        "5": ["Oruro", "Cercado", "Caracollo", "Huanuni", "Macha", "Santiago de Huari", "Eucaliptus", "Sabaya",
+            "Turco", "Chipaya", "Choquecota", "Corque", "Andamarca", "Soracachi", "Santiago de Andamarca",
+            "Pantijara", "Santuario de Quillacas", "Cruz de Machacamarca", "Poopó", "Challapata", "Mojinete",
+            "Salinas de Garci Mendoza", "Curahuara de Carangas", "Challapata", "Salinas de Garci Mendoza",
+            "Machacamarca", "La Rivera", "Esmeralda", "Pazña", "Antequera", "Huanuni", "Caracollo", "Poopó",
+            "Santiago de Machaca"],
+        "6": ["Cobija", "Porvenir", "Filotas", "Bolpebra", "El Sena", "Puerto Gonzalo Moreno", "Nueva Esperanza",
+            "Santos Mercado", "Ingavi", "San Lorenzo", "Santa Rosa del Abuná", "Bella Flor", "Villa Nueva",
+            "San Pedro", "San Pablo"],
+        "7": ["Potosí", "Uyuni", "Villazón", "Villa Imperial de Potosí", "Colcha K", "Tupiza", "Yocalla",
+            "Sacaca", "Tahua", "Tupiza", "San Pedro de Quemes", "Mojo", "Toro Toro", "Tinguipaya", "Tacobamba",
+            "Pocoata", "Tomas Frias", "Yocalla", "Urmiri", "Uncía", "Tacobamba", "Tinguipaya", "Pocoata",
+            "Ocurí", "Llallagua", "Colquechaca", "Acasio", "Betanzos", "Tacobamba", "Tinguipaya", "Pocoata",
+            "Ocurí", "Llallagua", "Colquechaca", "Acasio", "Betanzos", "Atocha", "San Pedro de Buena Vista"],
+        "8": ["Santa Cruz de la Sierra", "El Torno", "Porongo", "La Guardia", "Puerto Pailas", "Cotoca",
+            "Warnes", "Yapacaní", "Fernández Alonso", "Colpa Bélgica", "Portachuelo", "Mineros", "Comarapa",
+            "Samaipata", "Pampa Grande", "Mairana", "Camiri", "Charagua", "Gutierrez", "Cuevo", "Huacareta",
+            "Roboré", "Chiquitos", "San Ignacio de Velasco", "San Matías", "San Rafael", "Concepción",
+            "San Carlos", "San Javier", "Cuatro Cañadas", "San Ramón", "San Juan de Yapacaní",
+            "San Antonio de Lomerío", "Ascensión de Guarayos", "El Puente", "San José de Chiquitos", "Lagunillas",
+            "San Julián", "Saipina", "Cabezas", "San Pedro", "San Antonio de Oblitas", "Yotau", "San Pedro de Ycuamandiyú",
+            "El Trigal", "Muyupampa", "Comarapa", "Cabezas", "San Pedro", "San Antonio de Oblitas", "Yotau",
+            "San Pedro de Ycuamandiyú", "El Trigal", "Muyupampa"],
+        "9": ["Tarija", "Yacuiba", "Villamontes", "Bermejo", "Caraparí", "Padcaya", "Entre Ríos", "Uriondo",
+            "El Puente", "San Lorenzo", "Cercado"]
+
     };
 
     // Función para actualizar las ciudades cuando se selecciona un departamento
     $("#departamento").change(function () {
         var departamento = $(this).val();
-        var ciudades = ciudadesPorDepartamento[departamento];
-        var options = "<option value=''>Seleccionar ciudad</option>";
-        if (ciudades) {
-            for (var i = 0; i < ciudades.length; i++) {
-                options += "<option value='" + ciudades[i] + "'>" + ciudades[i] + "</option>";
+        var municipios = MunPorDe[departamento];
+        var options = "";
+        if (municipios) {
+            for (var i = 0; i < municipios.length; i++) {
+                options += "<option value='" + municipios[i] + "'>" + municipios[i] + "</option>";
             }
         }
-        $("#estado").html(options);
+        $("#municipio").html(options);
     });
+    // Establecer el primer departamento como seleccionado por defecto
+    var PriDep = Object.keys(MunPorDe)[0];
+    $("#departamento").val(PriDep).change();
 });
 
+$(document).ready(function() {
+    $('#cadastro').submit(function(event) {
+        // Evitar que el formulario se envíe
+        event.preventDefault();
+        
+        // Obtener los valores de los campos del formulario
+        var nombre = $('#nome').val();
+        var email = $('#email').val();
+        var telefono = $('#telefone').val();
+        var cep = $('#cep').val();
+        var barrio = $('#bairro').val();
+        var numero = $('#numero').val();
+        var vivienda = $('#vivienda').val();
+        var departamento = $('#departamento').val();
+        var estado = $('#municipio').val();
+        
+        // Guardar los datos en el almacenamiento local
+        localStorage.setItem('nombre', nombre);
+        localStorage.setItem('email', email);
+        localStorage.setItem('telefono', telefono);
+        localStorage.setItem('cep', cep);
+        localStorage.setItem('barrio', barrio);
+        localStorage.setItem('numero', numero);
+        localStorage.setItem('vivienda', vivienda);
+        localStorage.setItem('departamento', departamento);
+        localStorage.setItem('estado', estado);
 
+        // Mostrar un mensaje de confirmación
+        alert("Los datos se han guardado correctamente.");
+        
+        // Limpiar el formulario si lo deseas
+        $('#cadastro')[0].reset();
+    });
+});
