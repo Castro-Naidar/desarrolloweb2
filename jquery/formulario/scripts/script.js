@@ -219,38 +219,3 @@ $(document).ready(function () {
     var PriDep = Object.keys(MunPorDe)[0];
     $("#departamento").val(PriDep).change();
 });
-
-$(document).ready(function() {
-    $('#cadastro').submit(function(event) {
-        // Evitar que el formulario se envíe
-        event.preventDefault();
-        
-        // Obtener los valores de los campos del formulario
-        var nombre = $('#nome').val();
-        var email = $('#email').val();
-        var telefono = $('#telefone').val();
-        var cep = $('#cep').val();
-        var barrio = $('#bairro').val();
-        var numero = $('#numero').val();
-        var vivienda = $('#vivienda').val();
-        var departamento = $('#departamento').val();
-        var estado = $('#municipio').val();
-        
-        // Guardar los datos en el almacenamiento local
-        localStorage.setItem('nombre', nombre);
-        localStorage.setItem('email', email);
-        localStorage.setItem('telefono', telefono);
-        localStorage.setItem('cep', cep);
-        localStorage.setItem('barrio', barrio);
-        localStorage.setItem('numero', numero);
-        localStorage.setItem('vivienda', vivienda);
-        localStorage.setItem('departamento', departamento);
-        localStorage.setItem('estado', estado);
-
-        // Mostrar un mensaje de confirmación
-        alert("Los datos se han guardado correctamente.");
-        
-        // Limpiar el formulario si lo deseas
-        $('#cadastro')[0].reset();
-    });
-});

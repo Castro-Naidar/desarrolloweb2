@@ -47,6 +47,42 @@
             var departamento = localStorage.getItem('departamento');
             var estado = localStorage.getItem('estado');
 
+            // Mapear valores a opciones legibles
+            var viviendaTexto = vivienda === '1' ? 'Propia' : 'Alquilada';
+
+            var departamentoTexto = '';
+            switch (departamento) {
+                case '1':
+                    departamentoTexto = 'Beni';
+                    break;
+                case '2':
+                    departamentoTexto = 'Cochabamba';
+                    break;
+                case '3':
+                    departamentoTexto = 'Chuquisaca';
+                    break;
+                case '4':
+                    departamentoTexto = 'La Paz';
+                    break;
+                case '5':
+                    departamentoTexto = 'Oruro';
+                    break;
+                case '6':
+                    departamentoTexto = 'Pando';
+                    break;
+                case '7':
+                    departamentoTexto = 'Potosi';
+                    break;
+                case '8':
+                    departamentoTexto = 'Santa Cruz De La Sierra';
+                    break;
+                case '9':
+                    departamentoTexto = 'Tarija';
+                    break;
+                default:
+                    departamentoTexto = '';
+            }
+
             // Crear una fila para mostrar los datos en la tabla
             var fila = $('<tr>').append(
                 $('<td>').text(nombre),
@@ -55,8 +91,8 @@
                 $('<td>').text(cep),
                 $('<td>').text(barrio),
                 $('<td>').text(numero),
-                $('<td>').text(vivienda === '1' ? 'Propia' : 'Alquilada'), // Convertir el valor de vivienda a texto
-                $('<td>').text(departamento),
+                $('<td>').text(viviendaTexto), // Mostrar la opción seleccionada
+                $('<td>').text(departamentoTexto), // Mostrar la opción seleccionada
                 $('<td>').text(estado)
             );
 
@@ -66,7 +102,3 @@
     </script>
 </body>
 </html>
-
-
-
-
