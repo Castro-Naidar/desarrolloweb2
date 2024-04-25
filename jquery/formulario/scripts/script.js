@@ -254,38 +254,206 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    // Al cargar la página, recuperar los datos del Local Storage y mostrarlos en la tabla
+    mostrarDatosGuardados();
+
     $('#cadastro').submit(function (e) {
         e.preventDefault();
 
         // Obtener los valores del formulario
-        var nombre = $('#nome').val();
-        var email = $('#email').val();
-        var telefono = $('#telefone').val();
-        var ci = $('#cep').val();
-        var barrio = $('#bairro').val();
-        var numero = $('#numero').val();
-        var vivienda = $('#vivienda option:selected').text();
-        var departamento = $('#departamento option:selected').text();
-        var ciudad = $('#municipio option:selected').text();
+        var datos = obtenerDatosFormulario();
 
-        // Crear una nueva fila en la tabla
-        var newRow = $('<tr>');
-        newRow.append('<td>' + nombre + '</td>');
-        newRow.append('<td>' + email + '</td>');
-        newRow.append('<td>' + telefono + '</td>');
-        newRow.append('<td>' + ci + '</td>');
-        newRow.append('<td>' + barrio + '</td>');
-        newRow.append('<td>' + numero + '</td>');
-        newRow.append('<td>' + vivienda + '</td>');
-        newRow.append('<td>' + departamento + '</td>');
-        newRow.append('<td>' + ciudad + '</td>');
+        // Guardar los datos en el Local Storage
+        guardarDatosLocalStorage(datos);
 
-        // Agregar la fila a la tabla
-        $('#datos-body').append(newRow);
+        // Mostrar los datos en la tabla
+        mostrarDatosEnTabla(datos);
 
         // Limpiar el formulario después de enviar
         $('#cadastro')[0].reset();
     });
+
+    // Función para mostrar los datos guardados en el Local Storage al cargar la página
+    function mostrarDatosGuardados() {
+        var datosGuardados = JSON.parse(localStorage.getItem('datosGuardados'));
+        if (datosGuardados) {
+            datosGuardados.forEach(function (datos) {
+                mostrarDatosEnTabla(datos);
+            });
+        }
+    }
+
+    // Función para obtener los valores del formulario
+    function obtenerDatosFormulario() {
+        var datos = {
+            nombre: $('#nome').val(),
+            email: $('#email').val(),
+            telefono: $('#telefone').val(),
+            cep: $('#cep').val(),
+            barrio: $('#bairro').val(),
+            numero: $('#numero').val(),
+            vivienda: $('#vivienda option:selected').text(),
+            departamento: $('#departamento option:selected').text(),
+            ciudad: $('#municipio option:selected').text()
+        };
+        return datos;
+    }
+
+    // Función para guardar los datos en el Local Storage
+    function guardarDatosLocalStorage(datos) {
+        var datosGuardados = JSON.parse(localStorage.getItem('datosGuardados')) || [];
+        datosGuardados.push(datos);
+        localStorage.setItem('datosGuardados', JSON.stringify(datosGuardados));
+    }
+
+    // Función para mostrar los datos en la tabla
+    function mostrarDatosEnTabla(datos) {
+        var newRow = $('<tr>');
+        newRow.append('<td>' + datos.nombre + '</td>');
+        newRow.append('<td>' + datos.email + '</td>');
+        newRow.append('<td>' + datos.telefono + '</td>');
+        newRow.append('<td>' + datos.cep + '</td>');
+        newRow.append('<td>' + datos.barrio + '</td>');
+        newRow.append('<td>' + datos.numero + '</td>');
+        newRow.append('<td>' + datos.vivienda + '</td>');
+        newRow.append('<td>' + datos.departamento + '</td>');
+        newRow.append('<td>' + datos.ciudad + '</td>');
+        newRow.append('<td><button class="editar">Editar</button></td>');
+        $('#datos-body').append(newRow);
+    }
 });
+
+
+
+$(document).ready(function () {
+   
+    
+    // Mostrar u ocultar la tabla de datos y los botones al hacer clic en el botón "Listar"
+    $("button#listar").click(function () {
+        $("#tabla-contenedor").toggle();
+    });
+
+    // Función para guardar los datos del formulario en un array
+    function guardarDatos() {
+        var datos = {
+            nombre: $("#nome").val(),
+            email: $("#email").val(),
+            telefono: $("#telefone").val(),
+            cep: $("#cep").val(),
+            barrio: $("#bairro").val(),
+            numero: $("#numero").val(),
+            vivienda: $("#vivienda").val(),
+            departamento: $("#departamento").val(),
+            ciudad: $("#municipio").val()
+        };
+        return datos;
+    }
+
+    // Evento cuando se envía el formulario
+    $("#cadastro").submit(function (event) {
+        // Prevenir el envío por defecto
+        event.preventDefault();
+
+        // Guardar los datos en un array
+        var datosArray = guardarDatos();
+
+        // Aquí puedes hacer lo que quieras con los datosArray, como enviarlos a un servidor, mostrarlos en la consola, etc.
+        console.log(datosArray);
+    });
+
+    // Al cargar la página, recuperar los datos del Local Storage y mostrarlos en la tabla
+    mostrarDatosGuardados();
+
+    $('#cadastro').submit(function (e) {
+        e.preventDefault();
+
+        // Obtener los valores del formulario
+        var datos = obtenerDatosFormulario();
+
+        // Guardar los datos en el Local Storage
+        guardarDatosLocalStorage(datos);
+
+        // Mostrar los datos en la tabla
+        mostrarDatosEnTabla(datos);
+
+        // Limpiar el formulario después de enviar
+        $('#cadastro')[0].reset();
+    });
+
+    // Función para mostrar los datos guardados en el Local Storage al cargar la página
+    function mostrarDatosGuardados() {
+        var datosGuardados = JSON.parse(localStorage.getItem('datosGuardados'));
+        if (datosGuardados) {
+            datosGuardados.forEach(function (datos) {
+                mostrarDatosEnTabla(datos);
+            });
+        }
+    }
+
+    // Función para obtener los valores del formulario
+    function obtenerDatosFormulario() {
+        var datos = {
+            nombre: $('#nome').val(),
+            email: $('#email').val(),
+            telefono: $('#telefone').val(),
+            cep: $('#cep').val(),
+            barrio: $('#bairro').val(),
+            numero: $('#numero').val(),
+            vivienda: $('#vivienda option:selected').text(),
+            departamento: $('#departamento option:selected').text(),
+            ciudad: $('#municipio option:selected').text()
+        };
+        return datos;
+    }
+
+    // Función para guardar los datos en el Local Storage
+    function guardarDatosLocalStorage(datos) {
+        var datosGuardados = JSON.parse(localStorage.getItem('datosGuardados')) || [];
+        datosGuardados.push(datos);
+        localStorage.setItem('datosGuardados', JSON.stringify(datosGuardados));
+    }
+
+    // Función para mostrar los datos en la tabla
+    function mostrarDatosEnTabla(datos) {
+        var newRow = $('<tr>');
+        newRow.append('<td>' + datos.nombre + '</td>');
+        newRow.append('<td>' + datos.email + '</td>');
+        newRow.append('<td>' + datos.telefono + '</td>');
+        newRow.append('<td>' + datos.cep + '</td>');
+        newRow.append('<td>' + datos.barrio + '</td>');
+        newRow.append('<td>' + datos.numero + '</td>');
+        newRow.append('<td>' + datos.vivienda + '</td>');
+        newRow.append('<td>' + datos.departamento + '</td>');
+        newRow.append('<td>' + datos.ciudad + '</td>');
+        newRow.append('<td><button class="editar">Editar</button></td>');
+        $('#datos-body').append(newRow);
+    }
+
+    // Limpiar toda la tabla de datos y los botones al hacer clic en el botón "Limpiar"
+    $("button#limpiar").click(function () {
+        $("#datos-body").empty();
+    });
+
+    // Habilitar la edición en la fila al hacer clic en el botón "Editar"
+    $("table").on("click", "button.editar", function () {
+        var fila = $(this).closest("tr");
+        fila.find("td").each(function () {
+            var contenido = $(this).text();
+            $(this).html("<input type='text' value='" + contenido + "'>");
+        });
+        $(this).toggleClass("guardar").text("Guardar");
+    });
+
+    // Guardar los cambios al hacer clic en el botón "Guardar"
+    $("table").on("click", "button.guardar", function () {
+        var fila = $(this).closest("tr");
+        fila.find("td input").each(function () {
+            var contenido = $(this).val();
+            $(this).parent().html(contenido);
+        });
+        $(this).toggleClass("guardar").text("Editar");
+    });
+});
+
 
 
